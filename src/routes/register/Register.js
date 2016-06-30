@@ -90,7 +90,7 @@ var MovieView = React.createClass({
 
   componentDidMount: function() {
     var self = this;
-    fetch('/api').then(function(response) {
+    fetch('/api/movies').then(function(response) {
       return response.json();
     }).then(function(obj) {
       console.info(obj);

@@ -85,10 +85,22 @@ connection1.on('error', function(err) {
   console.info(err);
 });
 
-app.get('/api', function(req, res) {
+app.get('/api/movies', function(req, res) {
     var request = connection1.request();
 
-    request.query('select * from Title where ReleaseYear > 1989', function(err, recordset) {
+    request.query('select * from Title', function(err, recordset) {
+
+      if (err) console.log(err);
+
+      res.json(recordset);
+    });
+  }
+);
+app.get('/api/movies/:id', function(req, res) {
+  var request = connection1.request();
+  var query = 'select * from Title where TitleId = ' + req.params.id;
+
+  request.query(query, function(err, recordset) {
 
       console.dir(recordset);
       if (err) console.log(err);
