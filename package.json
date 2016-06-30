@@ -26,6 +26,7 @@
     "jade": "1.11.0",
     "jsonwebtoken": "7.0.0",
     "markdown-it": "6.0.5",
+    "mssql": "^3.3.0",
     "node-fetch": "1.5.3",
     "normalize.css": "4.1.1",
     "passport": "0.3.2",

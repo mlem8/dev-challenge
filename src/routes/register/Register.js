@@ -103,7 +103,7 @@ var MovieView = React.createClass({
   },
 
   render: function() {
-    return     <div className={s.root}>
+    return <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
         <SplitPane split="vertical" minSize={50} defaultSize={1000}>
