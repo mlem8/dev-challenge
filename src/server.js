@@ -96,18 +96,35 @@ app.get('/api/movies', function(req, res) {
     });
   }
 );
-app.get('/api/movies/:id', function(req, res) {
+app.get('/api/movies/:id/awards', function(req, res) {
   var request = connection1.request();
-  var query = 'select TitleName, ReleaseYear, Name as Genre, StoryLine.Type, StoryLine.Description, Language ' +
+  var query = 'select TitleName, AwardCompany, Award, AwardYear, AwardWon ' +
     'from Title ' +
-    'inner join TitleGenre on Title.TitleId = TitleGenre.TitleId ' +
-    'inner join Genre on TitleGenre.GenreId = Genre.Id ' +
-    'inner join StoryLine on Title.TitleId = StoryLine.TitleId ' +
+    'inner join Award on Title.TitleId = Award.TitleId ' +
     'where Title.TitleId = ' + req.params.id;
 
   console.log(query);
 
   request.query(query, function(err, recordset) {
+
+      console.dir(recordset);
+      if (err) console.log(err);
+
+      res.json(recordset);
+    });
+  }
+);
+app.get('/api/movies/:id/cast', function(req, res) {
+    var request = connection1.request();
+    var query = 'select Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
+      'from Title ' +
+      'inner join TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
+      'inner join Participant on TitleParticipant.ParticipantId = Participant.Id ' +
+      'where Title.TitleId = ' + req.params.id + ' AND RoleType = \'Actor\'';
+
+    console.log(query);
+
+    request.query(query, function(err, recordset) {
 
       console.dir(recordset);
       if (err) console.log(err);
