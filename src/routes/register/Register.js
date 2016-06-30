@@ -21,7 +21,7 @@ const title = 'Find Movies';
 
 var EXAMPLEMOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1997, TitleId: -1,
-  cast: []
+  cast: [], awards: []
 };
 
 var TitlesView = React.createClass({
@@ -79,6 +79,12 @@ var DetailsView = React.createClass({
           return <li>{l.Name}</li>
         }, this) }
       </ul>
+      <h3>Awards</h3>
+      <ul>
+        { this.props.selectedMovie.awards.map(function(l){
+          {if (l.AwardWon) return <li>{l.Award}</li>}
+        }, this) }
+      </ul>
     </div>;
   }
 
@@ -105,13 +111,20 @@ var MovieView = React.createClass({
 
     if (self.state.selectedMovie.TitleId == e.TitleId) return;
 
-      var url = '/api/movies/' + e.TitleId + '/cast';
-    fetch(url).then(function(response) {
+    var url = '/api/movies/' + e.TitleId;
+    fetch(url + '/cast').then(function(response) {
       return response.json();
-    }).then(function(obj) {
-      e.cast = obj;
-      self.setState({selectedMovie:e});
-      console.info(e);
+    }).then(function(cast) {
+      e.cast = cast;
+
+      fetch(url + '/awards').then(function(response) {
+        return response.json();
+      }).then(function(awards) {
+        e.awards = awards;
+
+        self.setState({selectedMovie:e});
+      });
+
     });
   },
 
