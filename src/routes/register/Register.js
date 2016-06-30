@@ -54,6 +54,7 @@ var TitlesView = React.createClass({
     }
 
     return <div>
+      <h2>Find Movies</h2>
       <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
       <ul>
         { libraries.map(function(l){
@@ -117,7 +118,6 @@ var MovieView = React.createClass({
   render: function() {
     return <div className={s.root}>
       <div className={s.container}>
-        <h1>{title}</h1>
         <SplitPane split="vertical" minSize={50} defaultSize={1000}>
           <TitlesView items={this.state.movies} handleSelect={this.handleSelect} />
           <DetailsView selectedMovie={this.state.selectedMovie} />
