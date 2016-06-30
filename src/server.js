@@ -114,11 +114,13 @@ app.get('/api/movies/:id/awards', function(req, res) {
 );
 app.get('/api/movies/:id/cast', function(req, res) {
     var request = connection1.request();
+    // TODO Fix 'Amadeus' use case
     var query = 'select Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
       'from Title ' +
       'inner join TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
       'inner join Participant on TitleParticipant.ParticipantId = Participant.Id ' +
-      'where Title.TitleId = ' + req.params.id + ' AND RoleType = \'Actor\'';
+      'where RoleType = \'Actor\' and IsKey = 1' +
+      'and Title.TitleId = ' + req.params.id;
 
     request.query(query, function(err, recordset) {
 
