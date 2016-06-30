@@ -98,7 +98,14 @@ app.get('/api/movies', function(req, res) {
 );
 app.get('/api/movies/:id', function(req, res) {
   var request = connection1.request();
-  var query = 'select * from Title where TitleId = ' + req.params.id;
+  var query = 'select TitleName, ReleaseYear, Name as Genre, StoryLine.Type, StoryLine.Description, Language ' +
+    'from Title ' +
+    'inner join TitleGenre on Title.TitleId = TitleGenre.TitleId ' +
+    'inner join Genre on TitleGenre.GenreId = Genre.Id ' +
+    'inner join StoryLine on Title.TitleId = StoryLine.TitleId ' +
+    'where Title.TitleId = ' + req.params.id;
+
+  console.log(query);
 
   request.query(query, function(err, recordset) {
 
