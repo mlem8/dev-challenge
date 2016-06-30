@@ -71,18 +71,13 @@ var DetailsView = React.createClass({
   render: function() {
 
     return <div className="details-view">
-      <div className="panel-heading">
-        {this.props.selectedMovie.TitleName}
-      </div>
-      <div className="panel-body">
-        {this.props.selectedMovie.ReleaseYear}
-      </div>
+      <h2>{this.props.selectedMovie.TitleName} ({this.props.selectedMovie.ReleaseYear})</h2>
+      <h3>Starring</h3>
       <ul>
         { this.props.selectedMovie.cast.map(function(l){
           return <li>{l.Name}</li>
         }, this) }
       </ul>
-      <Button>Default</Button>
     </div>;
   }
 
