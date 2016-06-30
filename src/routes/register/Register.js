@@ -17,6 +17,8 @@ import s from './Register.css';
 
 const title = 'Find Movies';
 
+var EXAMPLEMOVIE = { TitleName: 'Major Payne'};
+
 var TitlesView = React.createClass({
 
   getInitialState: function(){
@@ -25,19 +27,14 @@ var TitlesView = React.createClass({
 
   handleChange: function(e){
 
-    // If you comment out this line, the text box will not change its value.
-    // This is because in React, an input cannot change independently of the value
-    // that was assigned to it. In our case this is this.state.searchString.
-
     this.setState({searchString:e.target.value});
   },
 
   handleClick: function (obj) {
-    // this.props.onClick(obj);
-    console.info(obj); // this is what we want to pass to details
+    console.info(obj);
     console.log('omg you clicked something');
 
-    // this.setState({selectedTitle:myTitle});
+    this.props.handleSelect(obj);
   },
 
   render: function() {
@@ -72,35 +69,35 @@ var DetailsView = React.createClass({
 
     return <div className="details-view">
       <div className="panel-heading">
-        wakka wakka
+        {this.props.selectedMovie.TitleName}
       </div>
       <div className="panel-body">Info!!!</div>
     </div>;
   }
-  // return <div className="details-view">
-  //   <div className="panel-heading">
-  //     {this.props.selectedTitle}
-  //   </div>
-  //   <div className="panel-body">Info!!!</div>
-  // </div>;
+
 });
 
-function Register(props, context) {
-  context.setTitle(title);
-  return (
-    <div className={s.root}>
+var MovieView = React.createClass({
+  getInitialState: function(){
+    return { selectedMovie: EXAMPLEMOVIE };
+  },
+
+  handleChange: function(e){
+    this.setState({selectedMovie:e});
+  },
+
+  render: function() {
+    return     <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
-        <p>...</p>
         <div>
-          <TitlesView items={ TITLES } />
-          <DetailsView />
+          <TitlesView items={ TITLES } handleSelect={this.handleChange}/>
+          <DetailsView selectedMovie={this.state.selectedMovie} />
         </div>
       </div>
     </div>
-  );
-}
+  }
 
-Register.contextTypes = { setTitle: PropTypes.func.isRequired };
+});
 
-export default withStyles(s)(Register);
+export default withStyles(s)(MovieView);
