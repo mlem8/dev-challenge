@@ -19,7 +19,10 @@ import SplitPane from 'react-split-pane/lib/SplitPane';
 
 const title = 'Find Movies';
 
-var EXAMPLEMOVIE = { TitleName: 'Major Payne', ReleaseYear: 1997 };
+var EXAMPLEMOVIE = {
+  TitleName: 'Major Payne', ReleaseYear: 1997, TitleId: -1,
+  cast: []
+};
 
 var TitlesView = React.createClass({
 
@@ -32,7 +35,6 @@ var TitlesView = React.createClass({
   },
 
   handleClick: function (obj) {
-    console.info(obj);
     console.log('omg you clicked something');
 
     this.props.handleSelect(obj);
@@ -56,7 +58,7 @@ var TitlesView = React.createClass({
       <ul>
         { libraries.map(function(l){
           var boundClick = this.handleClick.bind(this, l);
-          return <li onClick={boundClick}>{l.TitleName} <a href="http://localhost:3000">{l.ReleaseYear}</a></li>
+          return <li onClick={boundClick}>{l.TitleName} ({l.ReleaseYear})</li>
         }, this) }
       </ul>
     </div>;
@@ -75,7 +77,11 @@ var DetailsView = React.createClass({
       <div className="panel-body">
         {this.props.selectedMovie.ReleaseYear}
       </div>
-      <div>{this.props.selectedMovie.ProcessedDateTimeUTC}</div>
+      <ul>
+        { this.props.selectedMovie.cast.map(function(l){
+          return <li>{l.Name}</li>
+        }, this) }
+      </ul>
       <Button>Default</Button>
     </div>;
   }
@@ -93,13 +99,24 @@ var MovieView = React.createClass({
     fetch('/api/movies').then(function(response) {
       return response.json();
     }).then(function(obj) {
-      console.info(obj);
       self.setState({movies:obj});
     });
   },
 
   handleSelect: function(e){
-    this.setState({selectedMovie:e});
+
+    var self = this;
+
+    if (self.state.selectedMovie.TitleId == e.TitleId) return;
+
+      var url = '/api/movies/' + e.TitleId + '/cast';
+    fetch(url).then(function(response) {
+      return response.json();
+    }).then(function(obj) {
+      e.cast = obj;
+      self.setState({selectedMovie:e});
+      console.info(e);
+    });
   },
 
   render: function() {

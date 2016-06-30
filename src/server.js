@@ -103,8 +103,6 @@ app.get('/api/movies/:id/awards', function(req, res) {
     'inner join Award on Title.TitleId = Award.TitleId ' +
     'where Title.TitleId = ' + req.params.id;
 
-  console.log(query);
-
   request.query(query, function(err, recordset) {
 
       console.dir(recordset);
@@ -121,8 +119,6 @@ app.get('/api/movies/:id/cast', function(req, res) {
       'inner join TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
       'inner join Participant on TitleParticipant.ParticipantId = Participant.Id ' +
       'where Title.TitleId = ' + req.params.id + ' AND RoleType = \'Actor\'';
-
-    console.log(query);
 
     request.query(query, function(err, recordset) {
 
