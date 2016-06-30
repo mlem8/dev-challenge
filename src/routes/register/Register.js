@@ -14,10 +14,15 @@ var TITLES = [{"TitleId":610,"TitleName":"Casablanca","TitleNameSortable":"Casab
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Register.css';
+import Button from 'react-bootstrap/lib/Button';
+// import Grid from 'react-bootstrap/lib/Grid';
+// import Col from 'react-bootstrap/lib/Col';
+// import Row from 'react-bootstrap/lib/Row';
+import SplitPane from 'react-split-pane/lib/SplitPane';
 
 const title = 'Find Movies';
 
-var EXAMPLEMOVIE = { TitleName: 'Major Payne'};
+var EXAMPLEMOVIE = { TitleName: 'Major Payne', ReleaseYear: 1997 };
 
 var TitlesView = React.createClass({
 
@@ -71,7 +76,8 @@ var DetailsView = React.createClass({
       <div className="panel-heading">
         {this.props.selectedMovie.TitleName}
       </div>
-      <div className="panel-body">Info!!!</div>
+      <div className="panel-body">{this.props.selectedMovie.ReleaseYear}</div>
+      <Button>Default</Button>
     </div>;
   }
 
@@ -90,10 +96,10 @@ var MovieView = React.createClass({
     return     <div className={s.root}>
       <div className={s.container}>
         <h1>{title}</h1>
-        <div>
+        <SplitPane split="vertical" minSize={50} defaultSize={1000}>
           <TitlesView items={ TITLES } handleSelect={this.handleChange}/>
           <DetailsView selectedMovie={this.state.selectedMovie} />
-        </div>
+        </SplitPane>
       </div>
     </div>
   }
