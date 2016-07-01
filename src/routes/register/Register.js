@@ -10,14 +10,11 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Register.css';
-import Button from 'react-bootstrap/lib/Button';
 import SplitPane from 'react-split-pane/lib/SplitPane';
-
+import Table from 'react-bootstrap/lib/Table';
 // import Grid from 'react-bootstrap/lib/Grid';
 // import Col from 'react-bootstrap/lib/Col';
 // import Row from 'react-bootstrap/lib/Row';
-
-const title = 'Find Movies';
 
 var EXAMPLEMOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1997, TitleId: -1,
@@ -55,14 +52,20 @@ var TitlesView = React.createClass({
     return <div>
       <h2>Find Movies</h2>
       <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
-      <ul>
+      <Table responsive>
+        <thead>
+          <tr>
+            <th>Title</th>
+          </tr>
+        </thead>
+        <tbody>
         { libraries.map(function(l){
           let movieItemClass = s.movieItem;
           {if (this.props.selectedMovie === l) {movieItemClass = s.selected}}
           var boundClick = this.handleClick.bind(this, l);
-          return <li onClick={boundClick} className={movieItemClass}>{l.TitleName} ({l.ReleaseYear})</li>
-        }, this) }
-      </ul>
+          return <tr><td onClick={boundClick} className={movieItemClass}>{l.TitleName} ({l.ReleaseYear})</td></tr>}, this) }
+        </tbody>
+      </Table>
     </div>;
 
   }
@@ -76,14 +79,14 @@ var DetailsView = React.createClass({
       <h2>{this.props.selectedMovie.TitleName} ({this.props.selectedMovie.ReleaseYear})</h2>
       <h3>Starring</h3>
       <ul>
-        { this.props.selectedMovie.cast.map(function(l){
-          return <li>{l.Name}</li>
+        { this.props.selectedMovie.cast.map(function(o){
+          return <li>{o.Name}</li>
         }, this) }
       </ul>
       <h3>Awards</h3>
       <ul>
-        { this.props.selectedMovie.awards.map(function(l){
-          {if (l.AwardWon) return <li>{l.Award}</li>}
+        { this.props.selectedMovie.awards.map(function(o){
+          {if (o.AwardWon) return <li>{o.Award}</li>}
         }, this) }
       </ul>
     </div>;

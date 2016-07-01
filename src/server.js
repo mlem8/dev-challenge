@@ -116,7 +116,7 @@ app.get('/api/movies/:id/cast', function(req, res) {
       'from Title ' +
       'inner join TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
       'inner join Participant on TitleParticipant.ParticipantId = Participant.Id ' +
-      'where RoleType = \'Actor\' and IsKey = 1' +
+      'where RoleType = \'Actor\' and IsKey = 1 ' +
       'and Title.TitleId = ' + req.params.id;
 
     request.query(query, function(err, recordset) {
