@@ -20,20 +20,10 @@
   max-width: var(--max-content-width);
 }
 
-.news {
-  padding: 0;
+.movieItem:hover {
+  background-color: lightgrey;
 }
 
-.newsItem {
-  list-style-type: none;
-  padding-bottom: 6px;
-}
-
-.newsTitle {
-  font-size: 1.125em;
-}
-
-.newsTitle,
-.newsDesc {
-  display: block;
+.selected {
+  background-color: cyan;
 }
