@@ -131,7 +131,7 @@ var Movies = React.createClass({
   render: function() {
     return <div className={s.root}>
       <div className={s.container}>
-        <SplitPane split="vertical" minSize={50} defaultSize={1000}>
+        <SplitPane split="vertical" minSize={50} defaultSize={1200} primary="second">
           <TitlesView items={this.state.movies} handleSelect={this.handleSelect} selectedMovie={this.state.selectedMovie} />
           <DetailsView selectedMovie={this.state.selectedMovie} />
         </SplitPane>
