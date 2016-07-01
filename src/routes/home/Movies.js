@@ -10,8 +10,10 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
-import SplitPane from 'react-split-pane/lib/SplitPane';
 import Table from 'react-bootstrap/lib/Table';
+import Grid from 'react-bootstrap/lib/Grid';
+import Row from 'react-bootstrap/lib/Row';
+import Col from 'react-bootstrap/lib/Col';
 
 var EXAMPLEMOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
@@ -131,10 +133,20 @@ var Movies = React.createClass({
   render: function() {
     return <div className={s.root}>
       <div className={s.container}>
-        <SplitPane split="vertical" minSize={50} defaultSize={1200} primary="second">
-          <TitlesView items={this.state.movies} handleSelect={this.handleSelect} selectedMovie={this.state.selectedMovie} />
-          <DetailsView selectedMovie={this.state.selectedMovie} />
-        </SplitPane>
+          <Grid>
+            <Row className="show-grid">
+              <Col md={6}>
+                <Col md={12}>
+                  <TitlesView items={this.state.movies} handleSelect={this.handleSelect} selectedMovie={this.state.selectedMovie} />
+                </Col>
+              </Col>
+              <Col md={6}>
+                <Col md={12}>
+                  <DetailsView selectedMovie={this.state.selectedMovie} />
+                </Col>
+              </Col>
+            </Row>
+          </Grid>
       </div>
     </div>
   }
