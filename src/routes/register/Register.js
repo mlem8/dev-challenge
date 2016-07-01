@@ -10,139 +10,21 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Register.css';
-import SplitPane from 'react-split-pane/lib/SplitPane';
-import Table from 'react-bootstrap/lib/Table';
-// import Grid from 'react-bootstrap/lib/Grid';
-// import Col from 'react-bootstrap/lib/Col';
-// import Row from 'react-bootstrap/lib/Row';
 
-var EXAMPLEMOVIE = {
-  TitleName: 'Major Payne', ReleaseYear: 1997, TitleId: -1,
-  cast: [], awards: []
-};
+const title = 'New User Registration';
 
-var TitlesView = React.createClass({
-
-  getInitialState: function(){
-    return { searchString: '' };
-  },
-
-  handleChange: function(e){
-    this.setState({searchString:e.target.value});
-  },
-
-  handleClick: function (obj) {
-    console.log('omg you clicked something');
-
-    this.props.handleSelect(obj);
-  },
-
-  render: function() {
-
-    var libraries = this.props.items,
-      searchString = this.state.searchString.trim().toLowerCase();
-
-    if(searchString.length > 0){
-
-      libraries = libraries.filter(function(l){
-        return l.TitleName.toLowerCase().match( searchString );
-      });
-    }
-
-    return <div>
-      <h2>Find Movies</h2>
-      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
-      <Table responsive>
-        <thead>
-          <tr>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody>
-        { libraries.map(function(l){
-          let movieItemClass = s.movieItem;
-          {if (this.props.selectedMovie === l) {movieItemClass = s.selected}}
-          var boundClick = this.handleClick.bind(this, l);
-          return <tr><td onClick={boundClick} className={movieItemClass}>{l.TitleName} ({l.ReleaseYear})</td></tr>}, this) }
-        </tbody>
-      </Table>
-    </div>;
-
-  }
-});
-
-var DetailsView = React.createClass({
-
-  render: function() {
-
-    return <div className="details-view">
-      <h2>{this.props.selectedMovie.TitleName} ({this.props.selectedMovie.ReleaseYear})</h2>
-      <h3>Starring</h3>
-      <ul>
-        { this.props.selectedMovie.cast.map(function(o){
-          return <li>{o.Name}</li>
-        }, this) }
-      </ul>
-      <h3>Awards</h3>
-      <ul>
-        { this.props.selectedMovie.awards.map(function(o){
-          {if (o.AwardWon) return <li>{o.Award}</li>}
-        }, this) }
-      </ul>
-    </div>;
-  }
-
-});
-
-var MovieView = React.createClass({
-
-  getInitialState: function(){
-    return { selectedMovie: EXAMPLEMOVIE, movies: [] };
-  },
-
-  componentDidMount: function() {
-    var self = this;
-    fetch('/api/movies').then(function(response) {
-      return response.json();
-    }).then(function(obj) {
-      self.setState({movies:obj});
-    });
-  },
-
-  handleSelect: function(e){
-
-    var self = this;
-
-    if (self.state.selectedMovie.TitleId == e.TitleId) return;
-
-    var url = '/api/movies/' + e.TitleId;
-    fetch(url + '/cast').then(function(response) {
-      return response.json();
-    }).then(function(cast) {
-      e.cast = cast;
-
-      fetch(url + '/awards').then(function(response) {
-        return response.json();
-      }).then(function(awards) {
-        e.awards = awards;
-
-        self.setState({selectedMovie:e});
-      });
-
-    });
-  },
-
-  render: function() {
-    return <div className={s.root}>
+function Register(props, context) {
+  context.setTitle(title);
+  return (
+    <div className={s.root}>
       <div className={s.container}>
-        <SplitPane split="vertical" minSize={50} defaultSize={1000}>
-          <TitlesView items={this.state.movies} handleSelect={this.handleSelect} selectedMovie={this.state.selectedMovie} />
-          <DetailsView selectedMovie={this.state.selectedMovie} />
-        </SplitPane>
+        <h1>{title}</h1>
+        <p>...</p>
       </div>
     </div>
-  }
+  );
+}
 
-});
+Register.contextTypes = { setTitle: PropTypes.func.isRequired };
 
-export default withStyles(s)(MovieView);
+export default withStyles(s)(Register);

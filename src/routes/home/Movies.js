@@ -14,7 +14,7 @@ import SplitPane from 'react-split-pane/lib/SplitPane';
 import Table from 'react-bootstrap/lib/Table';
 
 var EXAMPLEMOVIE = {
-  TitleName: 'Major Payne', ReleaseYear: 1997, TitleId: 0,
+  TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
   cast: [], awards: []
 };
 
