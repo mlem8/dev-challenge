@@ -50,7 +50,6 @@ var TitlesView = React.createClass({
       libraries = libraries.filter(function(l){
         return l.TitleName.toLowerCase().match( searchString );
       });
-
     }
 
     return <div>
@@ -58,8 +57,10 @@ var TitlesView = React.createClass({
       <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
       <ul>
         { libraries.map(function(l){
+          let movieItemClass = s.movieItem;
+          {if (this.props.selectedMovie === l) {movieItemClass = s.selected}}
           var boundClick = this.handleClick.bind(this, l);
-          return <li onClick={boundClick}>{l.TitleName} ({l.ReleaseYear})</li>
+          return <li onClick={boundClick} className={movieItemClass}>{l.TitleName} ({l.ReleaseYear})</li>
         }, this) }
       </ul>
     </div>;
@@ -132,7 +133,7 @@ var MovieView = React.createClass({
     return <div className={s.root}>
       <div className={s.container}>
         <SplitPane split="vertical" minSize={50} defaultSize={1000}>
-          <TitlesView items={this.state.movies} handleSelect={this.handleSelect} />
+          <TitlesView items={this.state.movies} handleSelect={this.handleSelect} selectedMovie={this.state.selectedMovie} />
           <DetailsView selectedMovie={this.state.selectedMovie} />
         </SplitPane>
       </div>

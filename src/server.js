@@ -89,7 +89,6 @@ app.get('/api/movies', function(req, res) {
     var request = connection1.request();
 
     request.query('select * from Title', function(err, recordset) {
-
       if (err) console.log(err);
 
       res.json(recordset);
@@ -104,8 +103,6 @@ app.get('/api/movies/:id/awards', function(req, res) {
     'where Title.TitleId = ' + req.params.id;
 
   request.query(query, function(err, recordset) {
-
-      console.dir(recordset);
       if (err) console.log(err);
 
       res.json(recordset);
@@ -123,8 +120,6 @@ app.get('/api/movies/:id/cast', function(req, res) {
       'and Title.TitleId = ' + req.params.id;
 
     request.query(query, function(err, recordset) {
-
-      console.dir(recordset);
       if (err) console.log(err);
 
       res.json(recordset);
