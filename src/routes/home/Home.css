@@ -21,6 +21,7 @@
 }
 
 .movieItem:hover {
+  cursor: pointer;
   background-color: lightgrey;
 }
 
