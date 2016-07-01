@@ -77,16 +77,16 @@ var config = {
   port: 6442
 };
 
-var connection1 = new sql.Connection(config, function(err) {
-
+var sqlConnection = new sql.Connection(config, function(err) {
+  if (err) console.log(err);
 });
 
-connection1.on('error', function(err) {
-  console.info(err);
+sqlConnection.on('error', function(err) {
+  console.log(err);
 });
 
 app.get('/api/movies', function(req, res) {
-    var request = connection1.request();
+    var request = sqlConnection.request();
 
     request.query('select * from Title', function(err, recordset) {
       if (err) console.log(err);
@@ -96,7 +96,7 @@ app.get('/api/movies', function(req, res) {
   }
 );
 app.get('/api/movies/:id/awards', function(req, res) {
-  var request = connection1.request();
+  var request = sqlConnection.request();
   var query = 'select TitleName, AwardCompany, Award, AwardYear, AwardWon ' +
     'from Title ' +
     'inner join Award on Title.TitleId = Award.TitleId ' +
@@ -110,7 +110,7 @@ app.get('/api/movies/:id/awards', function(req, res) {
   }
 );
 app.get('/api/movies/:id/cast', function(req, res) {
-    var request = connection1.request();
+    var request = sqlConnection.request();
     // TODO Fix 'Amadeus' use case
     var query = 'select Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
       'from Title ' +
