@@ -93,7 +93,8 @@ app.get('/api/movies', function(req, res) {
     'MAX(cast(Description as VARCHAR(MAX))) as Description ' +
     'FROM Title ' +
     'INNER JOIN StoryLine on Title.TitleId = StoryLine.TitleId ' +
-    'GROUP BY Title.TitleId, TitleName, TitleNameSortable';
+    'GROUP BY Title.TitleId, TitleName, TitleNameSortable ' +
+    'ORDER BY TitleNameSortable';
 
   request.query(query, function(err, recordset) {
     if (err) console.log(err);

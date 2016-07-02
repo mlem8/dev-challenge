@@ -20,6 +20,10 @@
   max-width: var(--max-content-width);
 }
 
+.movies {
+  padding: 0;
+}
+
 .movieItem:hover {
   cursor: pointer;
   background-color: lightgrey;
@@ -27,10 +31,6 @@
 
 .selected {
   background-color: lightgrey;
-}
-
-.movies {
-  padding: 0;
 }
 
 .movieDescription {
@@ -50,4 +50,12 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.readMore {
+  float: right;
+}
+
+.hidden {
+  display: none;
 }

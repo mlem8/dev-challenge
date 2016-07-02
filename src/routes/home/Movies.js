@@ -80,6 +80,7 @@ var TitlesView = React.createClass({
         <thead>
           <tr>
             <th>Title</th>
+            <th>Released</th>
           </tr>
         </thead>
         <tbody>
@@ -87,7 +88,7 @@ var TitlesView = React.createClass({
           let movieItemClass = s.movieItem;
           {if (this.props.selectedMovie === m) {movieItemClass = s.selected}}
           var boundClick = this.handleClick.bind(this, m);
-          return <tr><td onClick={boundClick} className={movieItemClass}>{m.TitleName} ({m.ReleaseYear})</td></tr>}, this) }
+          return <tr><td onClick={boundClick} className={movieItemClass}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
         </tbody>
       </Table>
     </div>;
@@ -111,11 +112,17 @@ var DetailsView = React.createClass({
       movieDescription: true,
       collapsed: this.state.collapsed
     });
+    let linkClass = cx({
+      readMore: true,
+      hidden: this.props.selectedMovie.Description.length < 292
+    });
+    let linkText = this.state.collapsed ? "More" : "Less";
 
     return <div className="details-view">
       <h2>{this.props.selectedMovie.TitleName} ({this.props.selectedMovie.ReleaseYear})</h2>
-      <Well bsSize="large" onClick={this.handleClick}>
-        <div className={descriptionClass}>{this.props.selectedMovie.Description}</div>
+      <Well bsSize="large">
+        <p className={descriptionClass}>{this.props.selectedMovie.Description}</p>
+        <a href="javascript:void(0)" className={linkClass} onClick={this.handleClick}>{linkText}</a>
       </Well>
       <h3>Starring</h3>
       <ul>
