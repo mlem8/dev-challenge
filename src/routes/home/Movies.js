@@ -8,6 +8,9 @@
  */
 
 import React, { PropTypes } from 'react';
+import FormGroup from 'react-bootstrap/lib/FormGroup';
+import FormControl from 'react-bootstrap/lib/FormControl';
+import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Table from 'react-bootstrap/lib/Table';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
@@ -59,10 +62,20 @@ var TitlesView = React.createClass({
       });
     }
 
-    // replace input w/ bootstrap component
     return <div>
       <h2>Find Movies</h2>
-      <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
+      <form>
+        <FormGroup>
+          <ControlLabel>Search by title</ControlLabel>
+          <FormControl
+            type="text"
+            value={this.state.searchString}
+            placeholder="Type here"
+            onChange={this.handleChange}
+          />
+          <FormControl.Feedback />
+        </FormGroup>
+      </form>
       <Table responsive>
         <thead>
           <tr>
