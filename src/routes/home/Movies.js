@@ -88,7 +88,7 @@ var TitlesView = React.createClass({
           let movieItemClass = s.movieItem;
           {if (this.props.selectedMovie === m) {movieItemClass = s.selected}}
           var boundClick = this.handleClick.bind(this, m);
-          return <tr><td onClick={boundClick} className={movieItemClass}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
+          return <tr key={m.TitleId}><td onClick={boundClick} className={movieItemClass}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
         </tbody>
       </Table>
     </div>;
@@ -98,42 +98,39 @@ var TitlesView = React.createClass({
 
 var DetailsView = React.createClass({
 
-  getInitialState: function(){
-    return { collapsed: true };
-  },
-
-  handleClick: function () {
-    this.setState({collapsed:!this.state.collapsed});
+  toggleCollapse: function () {
+    this.props.toggleCollapse();
   },
 
   render: function() {
 
+    // TODO: Implement description element as separate react component
     let descriptionClass = cx({
       movieDescription: true,
-      collapsed: this.state.collapsed
+      collapsed: this.props.collapsed
     });
     let linkClass = cx({
       readMore: true,
       hidden: this.props.selectedMovie.Description.length < 292
     });
-    let linkText = this.state.collapsed ? "More" : "Less";
+    let linkText = this.props.collapsed ? "More" : "Less";
 
     return <div className="details-view">
       <h2>{this.props.selectedMovie.TitleName} ({this.props.selectedMovie.ReleaseYear})</h2>
       <Well bsSize="large">
         <p className={descriptionClass}>{this.props.selectedMovie.Description}</p>
-        <a href="javascript:void(0)" className={linkClass} onClick={this.handleClick}>{linkText}</a>
+        <a href="javascript:void(0)" className={linkClass} onClick={this.toggleCollapse}>{linkText}</a>
       </Well>
       <h3>Starring</h3>
       <ul>
         { this.props.selectedMovie.cast.map(function(o){
-          return <li>{o.Name}</li>
+          return <li key={o.Id}>{o.Name}</li>
         }, this) }
       </ul>
       <h3>Awards</h3>
       <ul>
         { this.props.selectedMovie.awards.map(function(o){
-          {if (o.AwardWon) return <li>{o.Award}</li>}
+          {if (o.AwardWon) return <li key={o.Id}>{o.Award}</li>}
         }, this) }
       </ul>
     </div>;
@@ -145,7 +142,7 @@ var DetailsView = React.createClass({
 var Movies = React.createClass({
 
   getInitialState: function(){
-    return { selectedMovie: EXAMPLEMOVIE, movies: [] };
+    return { selectedMovie: EXAMPLEMOVIE, movies: [], collapsed: true };
   },
 
   //TODO: Move fetch calls to parent (index.js)
@@ -158,11 +155,20 @@ var Movies = React.createClass({
     });
   },
 
+  toggleCollapse: function() {
+    // this.setState({collapsed:!this.state.collapsed});
+
+    var self = this;
+    self.setState({collapsed:!self.state.collapsed});
+  },
+
   handleSelect: function(e){
 
     var self = this;
 
     if (self.state.selectedMovie.TitleId == e.TitleId) return;
+
+    self.setState({collapsed:true});
 
     var url = '/api/movies/' + e.TitleId;
     fetch(url + '/cast').then(function(response) {
@@ -188,12 +194,20 @@ var Movies = React.createClass({
             <Row className="show-grid">
               <Col md={6}>
                 <Col md={12}>
-                  <TitlesView items={this.state.movies} handleSelect={this.handleSelect} selectedMovie={this.state.selectedMovie} />
+                  <TitlesView
+                    items={this.state.movies}
+                    handleSelect={this.handleSelect}
+                    selectedMovie={this.state.selectedMovie}
+                  />
                 </Col>
               </Col>
               <Col md={6}>
                 <Col md={12}>
-                  <DetailsView selectedMovie={this.state.selectedMovie} />
+                  <DetailsView
+                    selectedMovie={this.state.selectedMovie}
+                    collapsed={this.state.collapsed}
+                    toggleCollapse={this.toggleCollapse}
+                  />
                 </Col>
               </Col>
             </Row>
