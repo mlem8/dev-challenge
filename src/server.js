@@ -86,38 +86,46 @@ sqlConnection.on('error', function(err) {
 });
 
 app.get('/api/movies', function(req, res) {
-    var request = sqlConnection.request();
+  var request = sqlConnection.request();
+  var query =
+    'SELECT Title.TitleId, TitleName, MIN(ReleaseYear) as ReleaseYear, ' +
+    // only grab one description per parent
+    'MAX(cast(Description as VARCHAR(MAX))) as Description ' +
+    'FROM Title ' +
+    'INNER JOIN StoryLine on Title.TitleId = StoryLine.TitleId ' +
+    'GROUP BY Title.TitleId, TitleName';
 
-    request.query('select * from Title', function(err, recordset) {
-      if (err) console.log(err);
+  request.query(query, function(err, recordset) {
+    if (err) console.log(err);
 
-      res.json(recordset);
-    });
-  }
+    res.json(recordset);
+  });
+}
 );
 app.get('/api/movies/:id/awards', function(req, res) {
   var request = sqlConnection.request();
-  var query = 'select TitleName, AwardCompany, Award, AwardYear, AwardWon ' +
-    'from Title ' +
-    'inner join Award on Title.TitleId = Award.TitleId ' +
-    'where Title.TitleId = ' + req.params.id;
+  var query =
+    'SELECT TitleName, AwardCompany, Award, AwardYear, AwardWon ' +
+    'FROM Title ' +
+    'INNER JOIN Award on Title.TitleId = Award.TitleId ' +
+    'WHERE Title.TitleId = ' + req.params.id;
 
   request.query(query, function(err, recordset) {
-      if (err) console.log(err);
+    if (err) console.log(err);
 
-      res.json(recordset);
+    res.json(recordset);
     });
   }
 );
 app.get('/api/movies/:id/cast', function(req, res) {
     var request = sqlConnection.request();
     // TODO Fix 'Amadeus' use case
-    var query = 'select Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
-      'from Title ' +
-      'inner join TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
-      'inner join Participant on TitleParticipant.ParticipantId = Participant.Id ' +
-      'where RoleType = \'Actor\' and IsKey = 1 ' +
-      'and Title.TitleId = ' + req.params.id;
+    var query =
+      'SELECT Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
+      'FROM Title ' +
+      'INNER JOIN TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
+      'INNER JOIN Participant on TitleParticipant.ParticipantId = Participant.Id ' +
+      'WHERE RoleType = \'Actor\' AND IsKey = 1 AND Title.TitleId = ' + req.params.id;
 
     request.query(query, function(err, recordset) {
       if (err) console.log(err);
