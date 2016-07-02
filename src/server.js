@@ -88,12 +88,12 @@ sqlConnection.on('error', function(err) {
 app.get('/api/movies', function(req, res) {
   var request = sqlConnection.request();
   var query =
-    'SELECT Title.TitleId, TitleName, MIN(ReleaseYear) as ReleaseYear, ' +
+    'SELECT Title.TitleId, TitleName, TitleNameSortable, MIN(ReleaseYear) as ReleaseYear, ' +
     // only grab one description per parent
     'MAX(cast(Description as VARCHAR(MAX))) as Description ' +
     'FROM Title ' +
     'INNER JOIN StoryLine on Title.TitleId = StoryLine.TitleId ' +
-    'GROUP BY Title.TitleId, TitleName';
+    'GROUP BY Title.TitleId, TitleName, TitleNameSortable';
 
   request.query(query, function(err, recordset) {
     if (err) console.log(err);

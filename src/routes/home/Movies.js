@@ -8,16 +8,29 @@
  */
 
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Home.css';
 import Table from 'react-bootstrap/lib/Table';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
+import Well from 'react-bootstrap/lib/Well';
+import classNames from 'classnames/bind';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './Home.css';
+
+let cx = classNames.bind(s);
 
 var EXAMPLEMOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
-  cast: [], awards: []
+  Description:
+    'Major Benson Winifred Payne is being discharged from the Marines. Payne ' +
+    'is a killin\' machine, but the wars of the world are no longer fought on the ' +
+    'battlefield. A career Marine, he has no idea what to do as a civilian, so his ' +
+    'commander finds him a job - commanding officer of a local school\'s JROTC ' +
+    'program, a bunch or ragtag losers with no hope. Using such teaching tools as ' +
+    'live grenades and real bullets, Payne starts to instill the corp with some hope. ' +
+    'But when Payne is recalled to fight in Bosnia, will he leave the corp that has just ' +
+    'started to believe in him, or will he find out that killin\' ain\'t much of a livin\'?',
+  cast: [{Name:'Damon Wayans'}], awards: []
 };
 
 var TitlesView = React.createClass({
@@ -46,6 +59,7 @@ var TitlesView = React.createClass({
       });
     }
 
+    // replace input w/ bootstrap component
     return <div>
       <h2>Find Movies</h2>
       <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Type here" />
@@ -70,10 +84,26 @@ var TitlesView = React.createClass({
 
 var DetailsView = React.createClass({
 
+  getInitialState: function(){
+    return { collapsed: true };
+  },
+
+  handleClick: function () {
+    this.setState({collapsed:!this.state.collapsed});
+  },
+
   render: function() {
+
+    let descriptionClass = cx({
+      movieDescription: true,
+      collapsed: this.state.collapsed
+    });
 
     return <div className="details-view">
       <h2>{this.props.selectedMovie.TitleName} ({this.props.selectedMovie.ReleaseYear})</h2>
+      <Well bsSize="large" onClick={this.handleClick}>
+        <div className={descriptionClass}>{this.props.selectedMovie.Description}</div>
+      </Well>
       <h3>Starring</h3>
       <ul>
         { this.props.selectedMovie.cast.map(function(o){
@@ -87,6 +117,7 @@ var DetailsView = React.createClass({
         }, this) }
       </ul>
     </div>;
+
   }
 
 });
