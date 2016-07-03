@@ -8,16 +8,13 @@
  */
 
 import React, { PropTypes } from 'react';
-import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
-import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import Table from 'react-bootstrap/lib/Table';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Home.css';
 import MovieDetails from './MovieDetails';
+import MovieList from './MovieList';
 
 var EXAMPLEMOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
@@ -32,66 +29,6 @@ var EXAMPLEMOVIE = {
     'started to believe in him, or will he find out that killin\' ain\'t much of a livin\'?',
   cast: [{Name:'Damon Wayans'}], awards: []
 };
-
-var TitlesView = React.createClass({
-
-  getInitialState: function(){
-    return { searchString: '' };
-  },
-
-  handleChange: function(e){
-    this.setState({searchString:e.target.value});
-  },
-
-  handleClick: function (obj) {
-    this.props.handleSelect(obj);
-  },
-
-  render: function() {
-
-    var movies = this.props.items,
-      searchString = this.state.searchString.trim().toLowerCase();
-
-    if(searchString.length > 0){
-
-      movies = movies.filter(function(l){
-        return l.TitleName.toLowerCase().match( searchString );
-      });
-    }
-
-    return <div>
-      <h2>Find Movies</h2>
-      <form>
-        <FormGroup>
-          <ControlLabel>Search by title</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.searchString}
-            placeholder="Type here"
-            onChange={this.handleChange}
-          />
-          <FormControl.Feedback />
-        </FormGroup>
-      </form>
-      <Table responsive>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Released</th>
-          </tr>
-        </thead>
-        <tbody>
-        { movies.map(function(m){
-          let movieItemClass = s.movieItem;
-          {if (this.props.selectedMovie === m) {movieItemClass = s.selected}}
-          var boundClick = this.handleClick.bind(this, m);
-          return <tr key={m.TitleId} className={movieItemClass}><td onClick={boundClick}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
-        </tbody>
-      </Table>
-    </div>;
-
-  }
-});
 
 var Movies = React.createClass({
 
@@ -139,7 +76,7 @@ var Movies = React.createClass({
             <Row className="show-grid">
               <Col md={6}>
                 <Col md={12}>
-                  <TitlesView
+                  <MovieList
                     items={this.state.movies}
                     handleSelect={this.handleSelect}
                     selectedMovie={this.state.selectedMovie}
