@@ -28,8 +28,4 @@
   --screen-sm-min: 768px;  /* Small screen / tablet */
   --screen-md-min: 992px;  /* Medium screen / desktop */
   --screen-lg-min: 1200px; /* Large screen / wide desktop */
-
-  --font-size: 14px;
-  --line-height: 1.4;
-  --lines-to-show: 4;
 }
