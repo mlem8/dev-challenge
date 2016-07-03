@@ -33,17 +33,7 @@ var EXAMPLEMOVIE = {
 var Movies = React.createClass({
 
   getInitialState: function(){
-    return { selectedMovie: EXAMPLEMOVIE, movies: []};
-  },
-
-  //TODO: Move fetch calls to parent (index.js)
-  componentDidMount: function() {
-    var self = this;
-    fetch('/api/movies').then(function(response) {
-      return response.json();
-    }).then(function(obj) {
-      self.setState({movies:obj});
-    });
+    return { selectedMovie: EXAMPLEMOVIE };
   },
 
   handleSelect: function(e){
@@ -70,30 +60,33 @@ var Movies = React.createClass({
   },
 
   render: function() {
-    return <div className={s.root}>
-      <div className={s.container}>
-          <Grid>
-            <Row className="show-grid">
-              <Col md={6}>
-                <Col md={12}>
-                  <MovieList
-                    items={this.state.movies}
-                    handleSelect={this.handleSelect}
-                    selectedMovie={this.state.selectedMovie}
-                  />
+    return (
+      <div className={s.root}>
+        <div className={s.container}>
+            <Grid>
+              <Row className="show-grid">
+                <Col md={6}>
+                  <Col md={12}>
+                    <MovieList
+                      items={this.props.movies}
+                      handleSelect={this.handleSelect}
+                      selectedMovie={this.state.selectedMovie}
+                    />
+                  </Col>
                 </Col>
-              </Col>
-              <Col md={6}>
-                <Col md={12}>
-                  <MovieDetails selectedMovie={this.state.selectedMovie}/>
+                <Col md={6}>
+                  <Col md={12}>
+                    <MovieDetails selectedMovie={this.state.selectedMovie}/>
+                  </Col>
                 </Col>
-              </Col>
-            </Row>
-          </Grid>
+              </Row>
+            </Grid>
+        </div>
       </div>
-    </div>
+    )
   }
 
 });
 
 export default withStyles(s)(Movies);
+

@@ -9,13 +9,18 @@
 
 import React from 'react';
 import Movies from './Movies';
+import fetch from '../../core/fetch';
 
 export default {
 
   path: '/',
 
-  action() {
-    return <Movies />;
-  },
+  async action() {
+
+    var response = await fetch('/api/movies');
+    var data = await response.json();
+
+    return <Movies movies={data} />;
+  }
 
 };
