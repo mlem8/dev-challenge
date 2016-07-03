@@ -12,7 +12,7 @@ import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Home.css';
+import s from './Movies.css';
 import MovieDetails from './MovieDetails';
 import MovieList from './MovieList';
 

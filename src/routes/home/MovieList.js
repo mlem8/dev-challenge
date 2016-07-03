@@ -4,7 +4,7 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import Table from 'react-bootstrap/lib/Table';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Home.css';
+import s from './Movies.css';
 
 var MovieList = React.createClass({
 
