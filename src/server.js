@@ -122,7 +122,7 @@ app.get('/api/movies/:id/cast', function(req, res) {
     var request = sqlConnection.request();
     // TODO Fix 'Amadeus' use case
     var query =
-      'SELECT Participant.Id, Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
+      'SELECT Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
       'FROM Title ' +
       'INNER JOIN TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
       'INNER JOIN Participant on TitleParticipant.ParticipantId = Participant.Id ' +
