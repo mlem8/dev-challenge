@@ -88,7 +88,7 @@ var TitlesView = React.createClass({
           let movieItemClass = s.movieItem;
           {if (this.props.selectedMovie === m) {movieItemClass = s.selected}}
           var boundClick = this.handleClick.bind(this, m);
-          return <tr key={m.TitleId}><td onClick={boundClick} className={movieItemClass}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
+          return <tr key={m.TitleId} className={movieItemClass}><td onClick={boundClick}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
         </tbody>
       </Table>
     </div>;
