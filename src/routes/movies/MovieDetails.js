@@ -1,45 +1,46 @@
 import React, { PropTypes } from 'react';
-import fetch from '../../core/fetch';
+// import fetch from '../../core/fetch';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
 // Child components
 import MovieDescription from './MovieDescription';
+import MovieCast from './MovieCast';
 import MovieAwards from './MovieAwards';
 
-var MovieCast = React.createClass( {
-
-  getInitialState: function(){
-    return { cast: [] };
-  },
-
-  componentWillReceiveProps : function(newProps) {
-
-    var self = this;
-    var url = '/api/movies/' + newProps.titleId;
-
-    fetch(url + '/cast').then(function(response) {
-      return response.json();
-    }).then(function(cast) {
-      self.setState({cast:cast});
-    });
-  },
-
-  render: function() {
-
-    return (
-
-      <ul>
-        { this.state.cast.map(function(item, index){
-          return <li key={index}>{item.Name}</li>
-        }, this) }
-      </ul>
-
-    );
-
-  }
-
-});
+// var MovieCast = React.createClass( {
+//
+//   getInitialState: function(){
+//     return { cast: [] };
+//   },
+//
+//   componentWillReceiveProps : function(newProps) {
+//
+//     var self = this;
+//     var url = '/api/movies/' + newProps.titleId;
+//
+//     fetch(url + '/cast').then(function(response) {
+//       return response.json();
+//     }).then(function(cast) {
+//       self.setState({cast:cast});
+//     });
+//   },
+//
+//   render: function() {
+//
+//     return (
+//
+//       <ul>
+//         { this.state.cast.map(function(item, index){
+//           return <li key={index}>{item.Name}</li>
+//         }, this) }
+//       </ul>
+//
+//     );
+//
+//   }
+//
+// });
 
 var MovieDetails = React.createClass({
 

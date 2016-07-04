@@ -3,10 +3,11 @@ import fetch from '../../core/fetch';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
-var MovieAwards = React.createClass( {
+// TODO: Refactor to share inheritance w/ MovieAwards
+var MovieCast = React.createClass( {
 
   getInitialState: function(){
-    return { awards: [] };
+    return { cast: [] };
   },
 
   componentWillReceiveProps : function(newProps) {
@@ -14,10 +15,10 @@ var MovieAwards = React.createClass( {
     var self = this;
     var url = '/api/movies/' + newProps.titleId;
 
-    fetch(url + '/awards').then(function(response) {
+    fetch(url + '/cast').then(function(response) {
       return response.json();
-    }).then(function(awards) {
-      self.setState({awards:awards});
+    }).then(function(cast) {
+      self.setState({cast:cast});
     });
   },
 
@@ -26,16 +27,15 @@ var MovieAwards = React.createClass( {
     return (
 
       <ul>
-        { this.state.awards.map(function(item, index){
-          return <li key={index}>{item.Award}</li>
+        { this.state.cast.map(function(item, index){
+          return <li key={index}>{item.Name}</li>
         }, this) }
       </ul>
-      
+
     );
 
   }
 
 });
 
-export default withStyles(s)(MovieAwards);
-
+export default withStyles(s)(MovieCast);
