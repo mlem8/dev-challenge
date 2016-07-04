@@ -16,16 +16,14 @@ class Awards extends Component {
       const response = await fetch(url);
       const data = await response.json();
 
-      this.setState({awards:data});
+      this.setState({ awards: data });
     })();
   };
 
   render() {
     return (
       <ul>
-        { this.state.awards.map(function(item, index){
-          return <li key={index}>{item.Award}</li>
-        }, this) }
+        {this.state.awards.map((item, index) => <li key={index}>{item.Award}</li>)}
       </ul>
     );
   }
