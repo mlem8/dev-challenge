@@ -109,7 +109,7 @@ app.get('/api/movies/:id/awards', function(req, res) {
     'SELECT Id, TitleName, AwardCompany, Award, AwardYear, AwardWon ' +
     'FROM Title ' +
     'INNER JOIN Award on Title.TitleId = Award.TitleId ' +
-    'WHERE Title.TitleId = ' + req.params.id;
+    `WHERE Title.TitleId = ${req.params.id}`;
 
   request.query(query, function(err, recordset) {
     if (err) console.log(err);
@@ -126,7 +126,7 @@ app.get('/api/movies/:id/cast', function(req, res) {
       'FROM Title ' +
       'INNER JOIN TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
       'INNER JOIN Participant on TitleParticipant.ParticipantId = Participant.Id ' +
-      'WHERE RoleType = \'Actor\' AND IsKey = 1 AND Title.TitleId = ' + req.params.id;
+      `WHERE RoleType = \'Actor\' AND IsKey = 1 AND Title.TitleId = ${req.params.id}`;
 
     request.query(query, function(err, recordset) {
       if (err) console.log(err);
