@@ -32,36 +32,40 @@ var MovieList = React.createClass({
       });
     }
 
-    return <div>
-      <h2>Find Movies</h2>
-      <form>
-        <FormGroup>
-          <ControlLabel>Search by title</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.searchString}
-            placeholder="Type here"
-            onChange={this.handleChange}
-          />
-          <FormControl.Feedback />
-        </FormGroup>
-      </form>
-      <Table responsive>
-        <thead>
-        <tr>
-          <th>Title</th>
-          <th>Released</th>
-        </tr>
-        </thead>
-        <tbody>
-        { movies.map(function(m, index){
-          let movieItemClass = s.movieItem;
-          {if (this.props.selectedMovie === m) {movieItemClass = s.selected}}
-          var boundClick = this.handleClick.bind(this, m);
-          return <tr key={index} className={movieItemClass}><td onClick={boundClick}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
-        </tbody>
-      </Table>
-    </div>;
+    return (
+
+      <div>
+        <h2>Find Movies</h2>
+        <form>
+          <FormGroup>
+            <ControlLabel>Search by title</ControlLabel>
+            <FormControl
+              type="text"
+              value={this.state.searchString}
+              placeholder="Type here"
+              onChange={this.handleChange}
+            />
+            <FormControl.Feedback />
+          </FormGroup>
+        </form>
+        <Table responsive>
+          <thead>
+          <tr>
+            <th>Title</th>
+            <th>Released</th>
+          </tr>
+          </thead>
+          <tbody>
+          { movies.map(function(m, index){
+            let movieItemClass = s.movieItem;
+            {if (this.props.selectedMovie === m) {movieItemClass = s.selected}}
+            var boundClick = this.handleClick.bind(this, m);
+            return <tr key={index} className={movieItemClass}><td onClick={boundClick}>{m.TitleName}</td><td>{m.ReleaseYear}</td></tr>}, this) }
+          </tbody>
+        </Table>
+      </div>
+      
+    );
 
   }
 });
