@@ -49,6 +49,7 @@ var Movies = React.createClass({
   render: function() {
 
     return (
+      
       <div className={s.root}>
         <div className={s.container}>
             <Grid>
@@ -71,7 +72,8 @@ var Movies = React.createClass({
             </Grid>
         </div>
       </div>
-    )
+      
+    );
   }
 
 });
