@@ -43,24 +43,12 @@ var Movies = React.createClass({
 
     if (self.state.selectedMovie.TitleId == e.TitleId) return;
 
-    var url = '/api/movies/' + e.TitleId;
-    fetch(url + '/cast').then(function(response) {
-      return response.json();
-    }).then(function(cast) {
-      e.cast = cast;
+    self.setState({selectedMovie:e});
 
-      fetch(url + '/awards').then(function(response) {
-        return response.json();
-      }).then(function(awards) {
-        e.awards = awards;
-
-        self.setState({selectedMovie:e});
-      });
-
-    });
   },
 
   render: function() {
+    
     return (
       <div className={s.root}>
         <div className={s.container}>
