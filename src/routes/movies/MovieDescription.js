@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Well from 'react-bootstrap/lib/Well';
 import classNames from 'classnames/bind';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
@@ -6,7 +6,7 @@ import s from './Movies.css';
 
 let cx = classNames.bind(s);
 
-var MovieDescription = React.createClass( {
+const MovieDescription = React.createClass( {
 
   getInitialState: function(){
     return { collapsed: true };

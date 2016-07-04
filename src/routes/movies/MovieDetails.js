@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
 // Child components
 import MovieDescription from './MovieDescription';
 import MovieCast from './MovieCast';
-import MovieAwards from './MovieAwards';
+import Awards from './Awards';
 
-var MovieDetails = React.createClass({
+const MovieDetails = React.createClass({
 
   render: function() {
 
@@ -19,7 +19,7 @@ var MovieDetails = React.createClass({
         <h3>Starring</h3>
         <MovieCast titleId={this.props.selectedMovie.TitleId}/>
         <h3>Awards</h3>
-        <MovieAwards titleId={this.props.selectedMovie.TitleId}/>
+        <Awards titleId={this.props.selectedMovie.TitleId}/>
       </div>
 
     );

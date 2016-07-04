@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
@@ -6,7 +6,7 @@ import s from './Movies.css';
 import MovieSearch from './MovieSearch';
 import MovieTable from './MovieTable';
 
-var MovieList = React.createClass({
+const MovieList = React.createClass({
 
   getInitialState: function(){
     return { searchString: '' };

@@ -1,10 +1,10 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import fetch from '../../core/fetch';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
 // TODO: Refactor to share inheritance w/ MovieAwards
-var MovieCast = React.createClass( {
+const MovieCast = React.createClass({
 
   getInitialState: function(){
     return { cast: [] };

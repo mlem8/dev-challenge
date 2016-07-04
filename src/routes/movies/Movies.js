@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -16,7 +16,7 @@ import s from './Movies.css';
 import MovieDetails from './MovieDetails';
 import MovieList from './MovieList';
 
-var EXAMPLEMOVIE = {
+const EXAMPLEMOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
   Description:
     'Major Benson Winifred Payne is being discharged from the Marines. Payne ' +
@@ -30,7 +30,7 @@ var EXAMPLEMOVIE = {
   cast: [{Name:'Damon Wayans'}], awards: []
 };
 
-var Movies = React.createClass({
+const Movies = React.createClass({
 
   getInitialState: function(){
     return { selectedMovie: EXAMPLEMOVIE };

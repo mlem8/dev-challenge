@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Table from 'react-bootstrap/lib/Table';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
-var MovieTable = React.createClass({
+const MovieTable = React.createClass({
 
   handleClick: function (obj) {
     this.props.handleClick(obj);

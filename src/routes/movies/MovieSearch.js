@@ -1,11 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
-var MovieSearch = React.createClass({
+const MovieSearch = React.createClass({
 
   handleChange: function(e){
     this.props.handleChange(e);
