@@ -51,10 +51,10 @@ var MovieAwards = React.createClass( {
     return { awards: [] };
   },
 
-  componentWillReceiveProps : function() {
+  componentWillReceiveProps : function(newProps) {
 
     var self = this;
-    var url = '/api/movies/' + this.props.titleId;
+    var url = '/api/movies/' + newProps.titleId;
 
     fetch(url + '/awards').then(function(response) {
       return response.json();
@@ -83,15 +83,15 @@ var MovieCast = React.createClass( {
     return { cast: [] };
   },
 
-  componentWillReceiveProps : function() {
+  componentWillReceiveProps : function(newProps) {
 
     var self = this;
-    var url = '/api/movies/' + this.props.titleId;
+    var url = '/api/movies/' + newProps.titleId;
 
     fetch(url + '/cast').then(function(response) {
       return response.json();
-    }).then(function(awards) {
-      self.setState({cast:awards});
+    }).then(function(cast) {
+      self.setState({cast:cast});
     });
   },
 
