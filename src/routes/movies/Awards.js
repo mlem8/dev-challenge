@@ -18,7 +18,7 @@ class Awards extends Component {
 
       this.setState({ awards: data });
     })();
-  };
+  }
 
   render() {
     return (

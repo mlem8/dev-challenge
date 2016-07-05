@@ -18,7 +18,7 @@ class Description extends Component {
 
   componentWillReceiveProps() {
     this.setState({ collapsed: true });
-  };
+  }
 
   handleClick = () => {
     this.setState({ collapsed: !this.state.collapsed });
@@ -31,17 +31,18 @@ class Description extends Component {
     });
     let collapseClass = cx({
       readMore: true,
-      hidden: this.props.description.length < 292
+      hidden: this.props.description.length < 292,
     });
     let linkText = this.state.collapsed ? 'More' : 'Less';
 
     return (
       <Well bsSize="large">
         <p className={descriptionClass}>{this.props.description}</p>
-        <a href="javascript:void(0)"
-           className={collapseClass}
-           onClick={this.handleClick}>
-          {linkText}
+        <a
+          href="javascript:void(0)"
+          className={collapseClass}
+          onClick={this.handleClick}
+        >{linkText}
         </a>
       </Well>
     );

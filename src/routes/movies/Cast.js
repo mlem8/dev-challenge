@@ -19,7 +19,7 @@ class Cast extends Component {
 
       this.setState({ cast: data });
     })();
-  };
+  }
 
   render() {
     return (
