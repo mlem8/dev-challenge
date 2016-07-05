@@ -14,14 +14,14 @@ class MovieList extends Component {
         TitleId: PropTypes.number,
         TitleName: PropTypes.string,
         ReleaseYear: PropTypes.number,
-        Description: PropTypes.string,
+        Storylines: PropTypes.array,
       }),
     ),
     selectedMovie: PropTypes.shape({
       TitleId: PropTypes.number,
       TitleName: PropTypes.string,
       ReleaseYear: PropTypes.number,
-      Description: PropTypes.string,
+      Storylines: PropTypes.array,
     }),
     handleClick: PropTypes.func.isRequired,
   };

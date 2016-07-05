@@ -11,11 +11,11 @@ function MovieDetails({ selectedMovie }) {
   return (
     <div>
       <h2>{selectedMovie.TitleName} ({selectedMovie.ReleaseYear})</h2>
-      <Description description={selectedMovie.Description} />
+      <Description description={selectedMovie.Storylines[0].Description} />
       <h3>Starring</h3>
-      <Cast titleId={selectedMovie.TitleId} />
+      <Cast titleId={selectedMovie.TitleId} cast={selectedMovie.Participants} />
       <h3>Awards</h3>
-      <Awards titleId={selectedMovie.TitleId} />
+      <Awards titleId={selectedMovie.TitleId} awards={selectedMovie.Awards} />
     </div>
   );
 }
@@ -25,7 +25,7 @@ MovieDetails.propTypes = {
     TitleId: PropTypes.number,
     TitleName: PropTypes.string,
     ReleaseYear: PropTypes.number,
-    Description: PropTypes.string,
+    Storylines: PropTypes.array,
   }),
 };
 

@@ -18,7 +18,8 @@ import MovieList from './MovieList';
 
 const EXAMPLE_MOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
-  Description:
+  Storylines: [{
+    Description:
     'Major Benson Winifred Payne is being discharged from the Marines. Payne ' +
     'is a killin\' machine, but the wars of the world are no longer fought on the ' +
     'battlefield. A career Marine, he has no idea what to do as a civilian, so his ' +
@@ -27,6 +28,8 @@ const EXAMPLE_MOVIE = {
     'live grenades and real bullets, Payne starts to instill the corp with some hope. ' +
     'But when Payne is recalled to fight in Bosnia, will he leave the corp that has just ' +
     'started to believe in him, or will he find out that killin\' ain\'t much of a livin\'?',
+  }],
+  Participants: [{Name:'Damon Wayans'}], Awards: []
 };
 
 class Movies extends Component {
@@ -37,7 +40,7 @@ class Movies extends Component {
         TitleId: PropTypes.number,
         TitleName: PropTypes.string,
         ReleaseYear: PropTypes.number,
-        Description: PropTypes.string,
+        Storylines: PropTypes.array,
       }),
     ),
   };

@@ -18,13 +18,16 @@ import jwt from 'jsonwebtoken';
 import ReactDOM from 'react-dom/server';
 import UniversalRouter from 'universal-router';
 import PrettyError from 'pretty-error';
-import sql from 'mssql';
+import mongodb from 'mongodb';
 import passport from './core/passport';
 import models from './data/models';
 import schema from './data/schema';
 import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
 import { port, auth, analytics } from './config';
+
+var MongoClient = mongodb.MongoClient;
+var db;
 
 const app = express();
 
@@ -70,71 +73,18 @@ app.get('/login/facebook/return',
 //
 // Movie API
 // -----------------------------------------------------------------------------
-const config = {
-  server: 'localhost',
-  user: 'turner',
-  password: 'devchallenge',
-  port: 6442,
-};
 
-let sqlConnection = new sql.Connection(config, (err) => {
-  if (err) console.log(err);
-});
+MongoClient.connect('mongodb://readonly:turner@ds043348.mongolab.com:43348/dev-challenge', function (err, database) {
+  if(err) throw err;
 
-sqlConnection.on('error', function(err) {
-  console.log(err);
+  db = database;
 });
 
 app.get('/api/movies', function(req, res) {
-  const request = sqlConnection.request();
-  const query =
-    'SELECT Title.TitleId, TitleName, TitleNameSortable, MIN(ReleaseYear) as ReleaseYear, ' +
-    // only grab one description per parent
-    'MAX(cast(Description as VARCHAR(MAX))) as Description ' +
-    'FROM Title ' +
-    'INNER JOIN StoryLine on Title.TitleId = StoryLine.TitleId ' +
-    'GROUP BY Title.TitleId, TitleName, TitleNameSortable ' +
-    'ORDER BY TitleNameSortable';
-
-  request.query(query, function(err, recordset) {
-    if (err) console.log(err);
-
-    res.json(recordset);
+  db.collection('Titles').find({}).toArray(function(err, results) {
+    res.json(results);
   });
-}
-);
-app.get('/api/movies/:id/awards', function(req, res) {
-  var request = sqlConnection.request();
-  var query =
-    'SELECT Id, TitleName, AwardCompany, Award, AwardYear, AwardWon ' +
-    'FROM Title ' +
-    'INNER JOIN Award on Title.TitleId = Award.TitleId ' +
-    `WHERE Title.TitleId = ${req.params.id}`;
-
-  request.query(query, function(err, recordset) {
-    if (err) console.log(err);
-
-    res.json(recordset);
-    });
-  }
-);
-app.get('/api/movies/:id/cast', function(req, res) {
-    var request = sqlConnection.request();
-    // TODO Fix 'Amadeus' use case
-    var query =
-      'SELECT Title.TitleName, ReleaseYear, RoleType, IsKey, IsOnScreen, Participant.Name ' +
-      'FROM Title ' +
-      'INNER JOIN TitleParticipant on Title.TitleId = TitleParticipant.TitleId ' +
-      'INNER JOIN Participant on TitleParticipant.ParticipantId = Participant.Id ' +
-      `WHERE RoleType = \'Actor\' AND IsKey = 1 AND Title.TitleId = ${req.params.id}`;
-
-    request.query(query, function(err, recordset) {
-      if (err) console.log(err);
-
-      res.json(recordset);
-    });
-  }
-);
+});
 
 //
 // Register API middleware
