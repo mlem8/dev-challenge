@@ -1,41 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 import fetch from '../../core/fetch';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
 // TODO: Refactor to share inheritance w/ MovieAwards
-const Cast = React.createClass({
+class Cast extends Component {
 
-  getInitialState: function(){
-    return { cast: [] };
-  },
+  state = {
+    cast: [],
+  };
 
-  componentWillReceiveProps : function(newProps) {
+  componentWillReceiveProps(newProps) {
+    const url = `/api/movies/${newProps.titleId}/cast`;
 
-    var self = this;
-    var url = '/api/movies/' + newProps.titleId;
+    (async() => {
+      const response = await fetch(url);
+      const data = await response.json();
 
-    fetch(url + '/cast').then(function(response) {
-      return response.json();
-    }).then(function(cast) {
-      self.setState({cast:cast});
-    });
-  },
+      this.setState({ cast: data });
+    })();
+  };
 
-  render: function() {
-
+  render() {
     return (
-
       <ul>
-        { this.state.cast.map(function(item, index){
-          return <li key={index}>{item.Name}</li>
-        }, this) }
+        {this.state.cast.map((item, index) => <li key={index}>{item.Name}</li>)}
       </ul>
-
     );
-
   }
 
-});
+}
 
 export default withStyles(s)(Cast);

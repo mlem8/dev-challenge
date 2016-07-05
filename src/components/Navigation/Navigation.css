@@ -9,6 +9,7 @@
 
 .root {
   margin: 0;
+  display: none;
 }
 
 .link {

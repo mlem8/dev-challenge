@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Table from 'react-bootstrap/lib/Table';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';

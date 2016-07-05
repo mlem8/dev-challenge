@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -27,7 +27,7 @@ const EXAMPLEMOVIE = {
     'live grenades and real bullets, Payne starts to instill the corp with some hope. ' +
     'But when Payne is recalled to fight in Bosnia, will he leave the corp that has just ' +
     'started to believe in him, or will he find out that killin\' ain\'t much of a livin\'?',
-  cast: [{Name:'Damon Wayans'}], awards: []
+  // cast: [{Name:'Damon Wayans'}], awards: []
 };
 
 const Movies = React.createClass({
@@ -49,7 +49,7 @@ const Movies = React.createClass({
   render: function() {
 
     return (
-      
+
       <div className={s.root}>
         <div className={s.container}>
             <Grid>
@@ -72,7 +72,7 @@ const Movies = React.createClass({
             </Grid>
         </div>
       </div>
-      
+
     );
   }
 

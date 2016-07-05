@@ -9,7 +9,7 @@ class Awards extends Component {
     awards: [],
   };
 
-  componentWillReceiveProps = (newProps) => {
+  componentWillReceiveProps(newProps) {
     const url = `/api/movies/${newProps.titleId}/awards`;
 
     (async() => {
