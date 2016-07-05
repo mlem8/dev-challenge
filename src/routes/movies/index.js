@@ -16,11 +16,10 @@ export default {
   path: '/',
 
   async action() {
-
-    var response = await fetch('/api/movies');
-    var data = await response.json();
+    const response = await fetch('/api/movies');
+    const data = await response.json();
 
     return <Movies movies={data} />;
-  }
+  },
 
 };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
@@ -6,39 +6,54 @@ import s from './Movies.css';
 import MovieSearch from './MovieSearch';
 import MovieTable from './MovieTable';
 
-const MovieList = React.createClass({
+class MovieList extends Component {
 
-  getInitialState: function(){
-    return { searchString: '' };
-  },
+  static propTypes = {
+    items: PropTypes.arrayOf(
+      PropTypes.shape({
+        TitleId: PropTypes.number,
+        TitleName: PropTypes.string,
+        ReleaseYear: PropTypes.number,
+        Description: PropTypes.string,
+      }),
+    ),
+    selectedMovie: PropTypes.shape({
+      TitleId: PropTypes.number,
+      TitleName: PropTypes.string,
+      ReleaseYear: PropTypes.number,
+      Description: PropTypes.string,
+    }),
+    handleClick: PropTypes.func.isRequired,
+  };
 
-  handleChange: function(e){
-    this.setState({searchString:e.target.value});
-  },
+  state = {
+    searchString: '',
+  };
 
-  handleClick: function (obj) {
-    this.props.handleSelect(obj);
-  },
+  handleInput = (e) => {
+    this.setState({ searchString: e.target.value });
+  };
 
-  render: function() {
+  handleClick = (e) => {
+    this.props.handleClick(e);
+  };
 
+  render() {
     return (
-
       <div>
         <MovieSearch
-          handleChange={this.handleChange}
+          handleInput={this.handleInput}
           searchString={this.state.searchString}
         />
         <MovieTable
-          movies={this.props.items}
-          handleClick={this.handleClick}
+          items={this.props.items}
+          selectedMovie={this.props.selectedMovie}
           searchString={this.state.searchString}
+          handleClick={this.handleClick}
         />
       </div>
-
     );
-
   }
-});
+}
 
 export default withStyles(s)(MovieList);

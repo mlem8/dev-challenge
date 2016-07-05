@@ -70,14 +70,14 @@ app.get('/login/facebook/return',
 //
 // Movie API
 // -----------------------------------------------------------------------------
-var config = {
+const config = {
   server: 'localhost',
-  user:     'turner',
+  user: 'turner',
   password: 'devchallenge',
-  port: 6442
+  port: 6442,
 };
 
-var sqlConnection = new sql.Connection(config, function(err) {
+let sqlConnection = new sql.Connection(config, (err) => {
   if (err) console.log(err);
 });
 
@@ -86,8 +86,8 @@ sqlConnection.on('error', function(err) {
 });
 
 app.get('/api/movies', function(req, res) {
-  var request = sqlConnection.request();
-  var query =
+  const request = sqlConnection.request();
+  const query =
     'SELECT Title.TitleId, TitleName, TitleNameSortable, MIN(ReleaseYear) as ReleaseYear, ' +
     // only grab one description per parent
     'MAX(cast(Description as VARCHAR(MAX))) as Description ' +

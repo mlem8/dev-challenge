@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
@@ -8,18 +8,16 @@ import Cast from './Cast';
 import Awards from './Awards';
 
 function MovieDetails({ selectedMovie }) {
-
   return (
-    <div className="details-view">
+    <div>
       <h2>{selectedMovie.TitleName} ({selectedMovie.ReleaseYear})</h2>
-      <Description description={selectedMovie.Description}/>
+      <Description description={selectedMovie.Description} />
       <h3>Starring</h3>
-      <Cast titleId={selectedMovie.TitleId}/>
+      <Cast titleId={selectedMovie.TitleId} />
       <h3>Awards</h3>
-      <Awards titleId={selectedMovie.TitleId}/>
+      <Awards titleId={selectedMovie.TitleId} />
     </div>
   );
-
 }
 
 MovieDetails.propTypes = {

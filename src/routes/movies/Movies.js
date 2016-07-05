@@ -7,7 +7,7 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
@@ -16,7 +16,7 @@ import s from './Movies.css';
 import MovieDetails from './MovieDetails';
 import MovieList from './MovieList';
 
-const EXAMPLEMOVIE = {
+const EXAMPLE_MOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
   Description:
     'Major Benson Winifred Payne is being discharged from the Marines. Payne ' +
@@ -27,56 +27,58 @@ const EXAMPLEMOVIE = {
     'live grenades and real bullets, Payne starts to instill the corp with some hope. ' +
     'But when Payne is recalled to fight in Bosnia, will he leave the corp that has just ' +
     'started to believe in him, or will he find out that killin\' ain\'t much of a livin\'?',
-  // cast: [{Name:'Damon Wayans'}], awards: []
 };
 
-const Movies = React.createClass({
+class Movies extends Component {
 
-  getInitialState: function(){
-    return { selectedMovie: EXAMPLEMOVIE };
-  },
+  static propTypes = {
+    movies: PropTypes.arrayOf(
+      PropTypes.shape({
+        TitleId: PropTypes.number,
+        TitleName: PropTypes.string,
+        ReleaseYear: PropTypes.number,
+        Description: PropTypes.string,
+      }),
+    ),
+  };
 
-  handleSelect: function(e){
+  state = {
+    selectedMovie: EXAMPLE_MOVIE,
+  };
 
-    var self = this;
+  handleSelect = (movie) => {
+    if (this.state.selectedMovie.TitleId === movie.TitleId) return;
+    this.setState({ selectedMovie: movie });
+  };
 
-    if (self.state.selectedMovie.TitleId == e.TitleId) return;
-
-    self.setState({selectedMovie:e});
-
-  },
-
-  render: function() {
-
+  render() {
     return (
-
       <div className={s.root}>
         <div className={s.container}>
-            <Grid>
-              <Row className="show-grid">
-                <Col md={6}>
-                  <Col md={12}>
-                    <MovieList
-                      items={this.props.movies}
-                      handleSelect={this.handleSelect}
-                      selectedMovie={this.state.selectedMovie}
-                    />
-                  </Col>
+          <Grid>
+            <Row className="show-grid">
+              <Col md={6}>
+                <Col md={12}>
+                  <MovieList
+                    items={this.props.movies}
+                    handleClick={this.handleSelect}
+                    selectedMovie={this.state.selectedMovie}
+                  />
                 </Col>
-                <Col md={6}>
-                  <Col md={12}>
-                    <MovieDetails selectedMovie={this.state.selectedMovie}/>
-                  </Col>
+              </Col>
+              <Col md={6}>
+                <Col md={12}>
+                  <MovieDetails selectedMovie={this.state.selectedMovie} />
                 </Col>
-              </Row>
-            </Grid>
+              </Col>
+            </Row>
+          </Grid>
         </div>
       </div>
-
     );
   }
 
-});
+}
 
 export default withStyles(s)(Movies);
 
