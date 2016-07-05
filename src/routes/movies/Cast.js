@@ -4,7 +4,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 
 // TODO: Refactor to share inheritance w/ MovieAwards
-const MovieCast = React.createClass({
+const Cast = React.createClass({
 
   getInitialState: function(){
     return { cast: [] };
@@ -38,4 +38,4 @@ const MovieCast = React.createClass({
 
 });
 
-export default withStyles(s)(MovieCast);
+export default withStyles(s)(Cast);
