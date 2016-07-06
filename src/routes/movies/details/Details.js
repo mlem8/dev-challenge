@@ -1,6 +1,4 @@
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from '../Movies.css';
 
 // Child components
 import Description from './Description';
@@ -29,4 +27,4 @@ Details.propTypes = {
   }),
 };
 
-export default withStyles(s)(Details);
+export default Details;
