@@ -26,10 +26,9 @@ import routes from './routes';
 import assets from './assets'; // eslint-disable-line import/no-unresolved
 import { port, auth, analytics } from './config';
 
-var MongoClient = mongodb.MongoClient;
-var db;
-
 const app = express();
+const MongoClient = mongodb.MongoClient;
+let db;
 
 //
 // Tell any CSS tooling (such as Material UI) to use all vendor prefixes if the
@@ -82,6 +81,8 @@ MongoClient.connect('mongodb://readonly:turner@ds043348.mongolab.com:43348/dev-c
 
 app.get('/api/movies', function(req, res) {
   db.collection('Titles').find({}).toArray(function(err, results) {
+    if (err) throw err;
+
     res.json(results);
   });
 });

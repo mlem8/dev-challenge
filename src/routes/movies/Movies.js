@@ -13,6 +13,8 @@ import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
+
+// Child components
 import Details from './details/Details';
 import List from './list/List';
 

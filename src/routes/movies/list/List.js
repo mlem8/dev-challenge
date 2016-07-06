@@ -1,6 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from '../Movies.css';
 
 // Child components
 import Search from './Search';
@@ -56,4 +54,4 @@ class List extends Component {
   }
 }
 
-export default withStyles(s)(List);
+export default List;

@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react';
 
+const filter = (actor, index) => {
+  if (actor.IsKey) return (<li key={index}>{actor.Name}</li>);
+  return null;
+};
+
 function Cast({ cast }) {
   return (
     <ul>
-      {cast.map((item, index) => { if (item.IsKey) return <li key={index}>{item.Name}</li>; })}
+      {cast.map(filter)}
     </ul>
   );
 }
