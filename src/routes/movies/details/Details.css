@@ -1,0 +1,29 @@
+/* TODO: Move style vars to more local scope */
+@import '../../../components/variables.css';
+
+.movieDescription {
+  font-style: italic;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+}
+
+/* multiline overflow rule modified from: https://codepen.io/martinwolf/pen/qlFdp */
+.collapsed {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: calc(--font-size * --line-height * --lines-to-show); /* Fallback for non-webkit */
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  -webkit-line-clamp: var(--lines-to-show);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.readMore {
+  float: right;
+}
+
+.hidden {
+  display: none;
+}

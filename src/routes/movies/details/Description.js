@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Well from 'react-bootstrap/lib/Well';
 import classNames from 'classnames/bind';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from '../Movies.css';
+import s from './Details.css';
 
 const cx = classNames.bind(s);
 

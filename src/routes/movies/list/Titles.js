@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Table from 'react-bootstrap/lib/Table';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from '../Movies.css';
+import s from './List.css';
 
 function Titles({ items, selectedMovie, searchString, handleClick }) {
   let movies = items;
