@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Movies.css';
+import s from '../Movies.css';
 
 // Child components
 import Description from './Description';
 import Cast from './Cast';
 import Awards from './Awards';
 
-function MovieDetails({ selectedMovie }) {
+function Details({ selectedMovie }) {
   return (
     <div>
       <h2>{selectedMovie.TitleName} ({selectedMovie.ReleaseYear})</h2>
@@ -20,7 +20,7 @@ function MovieDetails({ selectedMovie }) {
   );
 }
 
-MovieDetails.propTypes = {
+Details.propTypes = {
   selectedMovie: PropTypes.shape({
     TitleId: PropTypes.number,
     TitleName: PropTypes.string,
@@ -29,4 +29,4 @@ MovieDetails.propTypes = {
   }),
 };
 
-export default withStyles(s)(MovieDetails);
+export default withStyles(s)(Details);

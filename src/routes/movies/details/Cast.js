@@ -1,8 +1,5 @@
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Movies.css';
 
-// TODO: Refactor to share inheritance w/ MovieAwards
 function Cast({ cast }) {
   return (
     <ul>
@@ -20,4 +17,4 @@ Cast.propTypes = {
   ),
 };
 
-export default withStyles(s)(Cast);
+export default Cast;

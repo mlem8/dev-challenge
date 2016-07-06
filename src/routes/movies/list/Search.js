@@ -2,10 +2,8 @@ import React, { PropTypes } from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Movies.css';
 
-function MovieSearch({ searchString, handleInput }) {
+function Search({ searchString, handleInput }) {
   return (
     <div>
       <h2>Find Movies</h2>
@@ -25,9 +23,9 @@ function MovieSearch({ searchString, handleInput }) {
   );
 }
 
-MovieSearch.propTypes = {
+Search.propTypes = {
   handleInput: PropTypes.func.isRequired,
   searchString: PropTypes.string,
 };
 
-export default withStyles(s)(MovieSearch);
+export default Search;

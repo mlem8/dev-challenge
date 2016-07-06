@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Movies.css';
+import s from '../Movies.css';
 
 // Child components
-import MovieSearch from './MovieSearch';
+import Search from './Search';
 import MovieTable from './MovieTable';
 
 class MovieList extends Component {
@@ -41,7 +41,7 @@ class MovieList extends Component {
   render() {
     return (
       <div>
-        <MovieSearch
+        <Search
           handleInput={this.handleInput}
           searchString={this.state.searchString}
         />

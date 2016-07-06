@@ -1,6 +1,4 @@
 import React, { PropTypes } from 'react';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import s from './Movies.css';
 
 function Awards({ awards }) {
   return (
@@ -18,5 +16,5 @@ Awards.propTypes = {
   ),
 };
 
-export default withStyles(s)(Awards);
+export default Awards;
 
