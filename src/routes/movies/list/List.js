@@ -4,9 +4,9 @@ import s from '../Movies.css';
 
 // Child components
 import Search from './Search';
-import MovieTable from './MovieTable';
+import Titles from './Titles';
 
-class MovieList extends Component {
+class List extends Component {
 
   static propTypes = {
     items: PropTypes.arrayOf(
@@ -45,7 +45,7 @@ class MovieList extends Component {
           handleInput={this.handleInput}
           searchString={this.state.searchString}
         />
-        <MovieTable
+        <Titles
           items={this.props.items}
           selectedMovie={this.props.selectedMovie}
           searchString={this.state.searchString}
@@ -56,4 +56,4 @@ class MovieList extends Component {
   }
 }
 
-export default withStyles(s)(MovieList);
+export default withStyles(s)(List);

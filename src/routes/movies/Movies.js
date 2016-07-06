@@ -14,7 +14,7 @@ import Col from 'react-bootstrap/lib/Col';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Movies.css';
 import Details from './details/Details';
-import MovieList from './list/MovieList';
+import List from './list/List';
 
 const EXAMPLE_MOVIE = {
   TitleName: 'Major Payne', ReleaseYear: 1995, TitleId: 0,
@@ -62,7 +62,7 @@ class Movies extends Component {
             <Row className="show-grid">
               <Col md={6}>
                 <Col md={12}>
-                  <MovieList
+                  <List
                     items={this.props.movies}
                     handleClick={this.handleSelect}
                     selectedMovie={this.state.selectedMovie}

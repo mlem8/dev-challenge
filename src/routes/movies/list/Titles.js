@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/lib/Table';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from '../Movies.css';
 
-function MovieTable({ items, selectedMovie, searchString, handleClick }) {
+function Titles({ items, selectedMovie, searchString, handleClick }) {
   let movies = items;
   const searchStr = searchString.trim().toLowerCase();
 
@@ -38,7 +38,7 @@ function MovieTable({ items, selectedMovie, searchString, handleClick }) {
   );
 }
 
-MovieTable.propTypes = {
+Titles.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       TitleId: PropTypes.number,
@@ -57,4 +57,4 @@ MovieTable.propTypes = {
   handleClick: PropTypes.func.isRequired,
 };
 
-export default withStyles(s)(MovieTable);
+export default withStyles(s)(Titles);
