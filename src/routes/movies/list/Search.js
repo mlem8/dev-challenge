@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import FormControl, { Feedback } from 'react-bootstrap/lib/FormControl';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 
 function Search({ searchString, handleInput }) {
@@ -16,7 +16,7 @@ function Search({ searchString, handleInput }) {
             placeholder="Type here"
             onChange={handleInput}
           />
-          <FormControl.Feedback />
+          <Feedback />
         </FormGroup>
       </form>
     </div>
