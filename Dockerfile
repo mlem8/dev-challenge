@@ -21,8 +21,6 @@ RUN npm rebuild
 
 # Expose the app port
 EXPOSE 3000
-EXPOSE 3001
-EXPOSE 3002
 
 # Start the app
-CMD npm start
+CMD npm start -- --release
