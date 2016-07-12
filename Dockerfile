@@ -20,7 +20,7 @@ RUN npm install
 #RUN npm rebuild
 
 # Build the app in production mode
-RUN npm run build -- --release --verbose
+RUN npm run build -- --release
 
 # Expose the app port
 EXPOSE 3000
