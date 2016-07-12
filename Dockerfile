@@ -16,11 +16,14 @@ ADD . /usr/src/app
 WORKDIR /usr/src/app
 RUN npm install
 
-# Build the app, using rebuild to resolve issue w/ sqlite3 dep
-RUN npm rebuild
+# Rebuild app to resolve issue w/ sqlite3 dep -- TODO: fix dep issue
+#RUN npm rebuild
+
+# Build the app in production mode
+RUN npm run build -- --release --verbose
 
 # Expose the app port
 EXPOSE 3000
 
 # Start the app
-CMD npm start -- --release
+CMD node build/server.js
