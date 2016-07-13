@@ -15,14 +15,11 @@ RUN mkdir -p /usr/src/app
 WORKDIR ${appDir}
 
 # Install dependencies
-ADD package.json /usr/src/app
-RUN npm install --production
+ADD . /usr/src/app
+RUN npm install
 
 # Install process manager globally
 RUN npm install pm2 -g
-
-# Add app files
-ADD . /usr/src/app
 
 # Build the app in production mode
 RUN npm run build -- --release
