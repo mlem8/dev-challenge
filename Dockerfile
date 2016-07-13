@@ -10,6 +10,10 @@ RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted uni
 
 ENV appDir /usr/src/app
 
+# Updating to latest npm to resolve docker build issue
+# see: https://github.com/npm/npm/issues/4169
+RUN npm -g install npm@latest
+
 # Prepare app directory
 RUN mkdir -p /usr/src/app
 WORKDIR ${appDir}
