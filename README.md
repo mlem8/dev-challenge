@@ -2,4 +2,4 @@
 
 Boilerplate from: https://github.com/kriasoft/react-starter-kit
 
-Live preview [here](http://ec2-54-84-154-10.compute-1.amazonaws.com/)
+Live preview [here](http://devchallenge-env.us-west-1.elasticbeanstalk.com/)
