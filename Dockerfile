@@ -15,7 +15,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR ${appDir}
 
 # Install dependencies
-ADD package.json ./
+ADD package.json /usr/src/app
 RUN npm install --production
 
 # Install process manager globally
