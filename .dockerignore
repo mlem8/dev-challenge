@@ -1,6 +1,7 @@
 .git
 .gitignore
 .editorconfig
+build
 database
 node_modules
 *.log

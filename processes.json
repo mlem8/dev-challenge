@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "script": "./build/server.js",
+      "script": "build/server.js",
       "merge_logs": true,
       "max_restarts": 20,
       "instances": 4,
