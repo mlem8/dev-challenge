@@ -1,8 +1,8 @@
 {
   "private": true,
   "engines": {
-    "node": ">=5.0 <7",
-    "npm": ">=3.3 <4"
+    "node": ">=5.0",
+    "npm": ">=3.3"
   },
   "dependencies": {
     "babel-polyfill": "6.9.1",
